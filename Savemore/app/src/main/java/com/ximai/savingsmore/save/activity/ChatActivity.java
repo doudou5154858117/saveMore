@@ -8,7 +8,10 @@ import com.ximai.savingsmore.library.net.MyAsyncHttpResponseHandler;
 import com.ximai.savingsmore.library.net.RequestParamsPool;
 import com.ximai.savingsmore.library.net.URLText;
 import com.ximai.savingsmore.library.net.WebRequestHelper;
+import com.ximai.savingsmore.library.toolbox.GsonUtils;
 import com.ximai.savingsmore.save.common.BaseActivity;
+import com.ximai.savingsmore.save.easeUI.MyEaseChatFragment;
+import com.ximai.savingsmore.save.modle.IMUserList;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
@@ -38,7 +41,16 @@ public class ChatActivity extends BaseActivity {
             @Override
             public void onResponse(int statusCode, Header[] headers, byte[] responseBody) {
                 String result=new String(responseBody);
-                JSONObject object=new JSONObject();
+                IMUserList imUserList= GsonUtils.fromJson(result,IMUserList.class);
+                if(imUserList.IsSuccess.equals("true")&&imUserList.MainData.size()>0){
+                    setCenterTitle(imUserList.MainData.get(0).ShowName);
+                    MyEaseChatFragment myEaseChatFragment=new MyEaseChatFragment();
+                    Bundle args = new Bundle();
+                    args.putString(EaseConstant.EXTRA_USER_ID, imUserList.MainData.get(0).Id);
+                    myEaseChatFragment.setArguments(args);
+                    getSupportFragmentManager().beginTransaction().add(R.id.message, myEaseChatFragment).commit();
+
+                }
             }
         });
     }

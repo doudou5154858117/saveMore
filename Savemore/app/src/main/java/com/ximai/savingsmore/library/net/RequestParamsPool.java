@@ -773,14 +773,13 @@ public class RequestParamsPool {
         JSONObject object = new JSONObject();
         JSONObject object1 = new JSONObject();
         try {
-            //  JSONArray array=new JSONArray();
-//            for(int i=0;i<userName.size();i++){
-//                JSONObject object2=new JSONObject(userName.get(i));
-//                array.put(object2);
-//            }
+            JSONArray array = new JSONArray();
+            for (int i = 0; i < userName.size(); i++) {
+                array.put(userName.get(i));
+            }
             object1.put("SecurityStamp", LoginUser.getInstance().userInfo.SecurityStamp);
             object.put("SecurityStampParameter", object1);
-            object.put("IMUserNameList", "[" + userName.get(0) + "]");
+            object.put("IMUserNameList", array);
         } catch (JSONException e) {
             e.printStackTrace();
         }

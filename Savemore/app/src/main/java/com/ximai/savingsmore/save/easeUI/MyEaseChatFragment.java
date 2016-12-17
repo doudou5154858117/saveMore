@@ -70,7 +70,7 @@ public class MyEaseChatFragment extends EaseBaseFragment implements EMEventListe
     protected Bundle fragmentArgs;
     protected int chatType;
     protected String toChatUsername;
-    protected EaseChatMessageList messageList;
+    protected MyEaseChatMessageList messageList;
     protected EaseChatInputMenu inputMenu;
 
     protected EMConversation conversation;
@@ -127,7 +127,7 @@ public class MyEaseChatFragment extends EaseBaseFragment implements EMEventListe
         voiceRecorderView = (EaseVoiceRecorderView) getView().findViewById(com.easemob.easeui.R.id.voice_recorder);
 
         // 消息列表layout
-        messageList = (EaseChatMessageList) getView().findViewById(com.easemob.easeui.R.id.message_list);
+        messageList = (MyEaseChatMessageList) getView().findViewById(com.easemob.easeui.R.id.message_list);
         if(chatType != EaseConstant.CHATTYPE_SINGLE)
             messageList.setShowUserNick(true);
         listView = messageList.getListView();
